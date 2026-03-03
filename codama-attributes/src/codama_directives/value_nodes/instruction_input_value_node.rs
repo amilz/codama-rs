@@ -1,3 +1,4 @@
+use crate::codama_directives::value_nodes::ata_value_node::pda_value_node_from_ata;
 use crate::utils::FromMeta;
 use codama_nodes::{
     AccountBumpValueNode, AccountValueNode, ArgumentValueNode, InstructionInputValueNode,
@@ -11,6 +12,7 @@ impl FromMeta for InstructionInputValueNode {
             "account" => AccountValueNode::from_meta(meta).map(Self::from),
             "account_bump" => AccountBumpValueNode::from_meta(meta).map(Self::from),
             "argument" => ArgumentValueNode::from_meta(meta).map(Self::from),
+            "ata" => pda_value_node_from_ata(meta).map(Self::from),
             "payer" => PayerValueNode::from_meta(meta).map(Self::from),
             "pda" => PdaValueNode::from_meta(meta).map(Self::from),
             _ => ValueNode::from_meta(meta).map(Self::from),
